@@ -95,6 +95,7 @@ body {
     transition: 0.2s;
 }
 
+
 /* ============================================
    BANNERS
    ============================================ */
@@ -497,4 +498,602 @@ body {
     padding: 40px;
     font-size: 18px;
     color: #FF4D4D;
+}
+/* ============================================
+   МОДАЛЬНОЕ ОКНО КАТАЛОГА
+   ============================================ */
+
+/* Оверлей (затемнение фона) */
+.catalog-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Активное состояние модального окна */
+.catalog-modal.active {
+    display: flex;
+    animation: modalFadeIn 0.3s ease;
+}
+
+/* Контент модального окна */
+.catalog-modal-content {
+    background: white;
+    border-radius: 32px;
+    width: 90%;
+    max-width: 1300px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalSlideUp 0.3s ease;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Заголовок модального окна */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #E1E5EB;
+    background: white;
+    flex-shrink: 0;
+}
+
+.modal-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0F1113;
+    margin: 0;
+}
+
+/* Кнопка закрытия */
+.modal-close {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid #E1E5EB;
+    background: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    background: #FF4D4D;
+    color: white;
+    border-color: #FF4D4D;
+    transform: rotate(90deg);
+}
+
+/* Тело модального окна */
+.modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* Плавающая кнопка открытия каталога */
+.open-catalog-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #FF4D4D;
+    color: white;
+    border: none;
+    border-radius: 60px;
+    padding: 16px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255, 77, 77, 0.3);
+    z-index: 100;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.open-catalog-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 28px rgba(255, 77, 77, 0.4);
+}
+
+.open-catalog-btn:active {
+    transform: scale(0.98);
+}
+
+/* Анимации для модального окна */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalSlideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   СТРАНИЦА КАТАЛОГА ТЕЛЕФОНОВ (catalog-popup.html)
+   ============================================ */
+
+/* Основной контейнер страницы каталога */
+.catalog-page {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: #FFFFFF;
+    min-height: 100vh;
+}
+
+/* Шапка каталога */
+.catalog-header {
+    background: linear-gradient(135deg, #FF4D4D 0%, #FF6B6B 100%);
+    border-radius: 24px;
+    padding: 48px;
+    margin-bottom: 40px;
+    text-align: center;
+    color: white;
+}
+
+.catalog-header h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+    font-weight: 800;
+}
+
+.catalog-header p {
+    font-size: 18px;
+    opacity: 0.95;
+}
+
+/* Секция фильтров */
+.filter-section {
+    background: #F6F7FA;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.filter-section h3 {
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #0F1113;
+}
+
+/* Сетка фильтров */
+.filter-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+/* Кнопки фильтров */
+.filter-chip {
+    background: white;
+    border: 1px solid #E1E5EB;
+    border-radius: 40px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+}
+
+.filter-chip.active {
+    background: #FF4D4D;
+    color: white;
+    border-color: #FF4D4D;
+}
+
+.filter-chip:hover {
+    background: #FF4D4D;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Сетка товаров */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+/* Карточка товара */
+.product-item {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 1px solid #F2F5F9;
+}
+
+.product-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Область изображения товара */
+.product-image {
+    width: 100%;
+    height: 240px;
+    background: #F5F7FA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.product-item:hover .product-image img {
+    transform: scale(1.05);
+}
+
+/* Бейджики на товарах */
+.product-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #FF4D4D;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.product-badge.hot {
+    background: #FF6B35;
+}
+
+.product-badge.new {
+    background: #30D170;
+}
+
+/* Информация о товаре */
+.product-info {
+    padding: 20px;
+}
+
+.product-category {
+    color: #7E8794;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #0F1113;
+    line-height: 1.3;
+}
+
+/* Цены */
+.product-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FF4D4D;
+    margin-bottom: 8px;
+}
+
+.product-old-price {
+    text-decoration: line-through;
+    color: #A1ABB9;
+    font-size: 14px;
+    margin-left: 8px;
+    font-weight: 400;
+}
+
+/* Рейтинг */
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.stars {
+    color: #FFB800;
+    letter-spacing: 2px;
+    font-size: 14px;
+}
+
+/* Кнопки действий (лайк/сравнение) */
+.product-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.btn-like, .btn-compare {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #E1E5EB;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-like:hover, .btn-compare:hover {
+    border-color: #FF4D4D;
+    color: #FF4D4D;
+}
+
+.btn-like.active {
+    background: #FF4D4D;
+    color: white;
+    border-color: #FF4D4D;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 40px;
+    padding-bottom: 40px;
+}
+
+.page-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #E1E5EB;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.page-btn:hover {
+    background: #FF4D4D;
+    color: white;
+    border-color: #FF4D4D;
+}
+
+.page-btn.active {
+    background: #FF4D4D;
+    color: white;
+    border-color: #FF4D4D;
+}
+
+/* Сообщение об отсутствии товаров */
+.no-products {
+    text-align: center;
+    padding: 60px;
+    font-size: 18px;
+    color: #7E8794;
+}
+
+/* ============================================
+   АНИМАЦИЯ ЗАГРУЗКИ (SKELETON)
+   ============================================ */
+.skeleton {
+    background: linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%);
+    background-size: 200% 100%;
+    animation: skeletonLoading 1.5s infinite;
+    border-radius: 12px;
+}
+
+@keyframes skeletonLoading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+   ============================================ */
+@media (max-width: 768px) {
+    /* Модальное окно */
+    .open-catalog-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .catalog-modal-content {
+        width: 95%;
+        height: 95vh;
+        border-radius: 20px;
+    }
+    
+    .modal-header {
+        padding: 16px;
+    }
+    
+    .modal-header h2 {
+        font-size: 18px;
+    }
+    
+    .modal-close {
+        width: 36px;
+        height: 36px;
+    }
+    
+    /* Страница каталога */
+    .catalog-page {
+        padding: 20px 16px;
+    }
+    
+    .catalog-header {
+        padding: 32px 24px;
+    }
+    
+    .catalog-header h1 {
+        font-size: 28px;
+    }
+    
+    .catalog-header p {
+        font-size: 14px;
+    }
+    
+    .filter-section {
+        padding: 16px;
+    }
+    
+    .filter-grid {
+        gap: 8px;
+        justify-content: center;
+    }
+    
+    .filter-chip {
+        padding: 6px 14px;
+        font-size: 12px;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .product-image {
+        height: 200px;
+    }
+    
+    .product-name {
+        font-size: 16px;
+    }
+    
+    .product-price {
+        font-size: 20px;
+    }
+    
+    .btn-like, .btn-compare {
+        padding: 10px;
+        font-size: 12px;
+    }
+    
+    .pagination {
+        gap: 8px;
+    }
+    
+    .page-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+}
+
+/* Планшеты (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+    
+    .catalog-header h1 {
+        font-size: 36px;
+    }
+}
+
+/* Большие экраны (1440px+) */
+@media (min-width: 1440px) {
+    .catalog-page {
+        padding: 40px;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ============================================
+   ДОПОЛНИТЕЛЬНЫЕ ЭФФЕКТЫ
+   ============================================ */
+
+/* Запрет скролла body когда открыто модальное окно */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Эффект наведения на карточку */
+.product-item {
+    position: relative;
+}
+
+.product-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
+    transition: all 0.3s;
+    pointer-events: none;
+}
+
+.product-item:hover::after {
+    box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.3);
+}
+
+/* Анимация сердечка при лайке */
+.btn-like.active {
+    animation: likePulse 0.3s ease;
+}
+
+@keyframes likePulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
