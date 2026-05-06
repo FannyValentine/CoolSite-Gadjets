@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="site-container">
         <!-- HEADER -->
@@ -31,7 +32,18 @@
                 <div class="icon-circle">📊</div>
             </div>
         </header>
-
+        <!-- Модальное окно каталога телефонов -->
+        <div id="catalogModal" class="catalog-modal">
+            <div class="catalog-modal-content">
+                <div class="modal-header">
+                    <h2>📱 Каталог телефонов</h2>
+                    <button class="modal-close" onclick="closeCatalogModal()">✕</button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <iframe src="catalog-popup.html" title="Каталог телефонов" style="width: 100%; height: 80vh; border: none;"></iframe>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <!-- BANNERS -->
             <div class="banners-row">
@@ -144,6 +156,41 @@
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+    // Функции для модального окна
+    function openCatalogModal() {
+        const modal = document.getElementById('catalogModal');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeCatalogModal() {
+        const modal = document.getElementById('catalogModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // Закрытие по клику на оверлей
+    document.addEventListener('click', function(e) {
+        const modal = document.getElementById('catalogModal');
+        if (e.target === modal) {
+            closeCatalogModal();
+        }
+    });
+    
+    // Закрытие по клавише ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('catalogModal');
+            if (modal.classList.contains('active')) {
+                closeCatalogModal();
+            }
+        }
+    });
+    </script>
+    <!-- Кнопка открытия каталога -->
+    <button class="open-catalog-btn" onclick="openCatalogModal()">
+        📱 Каталог телефонов
+    </button>
 </body>
 </html>
