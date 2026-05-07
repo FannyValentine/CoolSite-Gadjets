@@ -154,7 +154,31 @@ body {
     gap: 32px;
     margin: 40px auto 60px;
 }
+/* Кнопка каталога в футере */
+.footer-catalog-btn {
+    background: #FF4D4D;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    margin-top: 8px;
+}
 
+.footer-catalog-btn:hover {
+    background: #e04343;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 77, 77, 0.3);
+}
+
+/* Убираем старую плавающую кнопку */
+.open-catalog-btn {
+    display: none;
+}
 .banner-main {
     background: #F2F5F9;
     border-radius: 16px;
