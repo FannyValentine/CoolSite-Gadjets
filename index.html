@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="site-container">
+        <!-- Header -->
         <header class="main-header">
             <div class="logo-info">
                 <div class="logo">
@@ -18,7 +19,7 @@
                         <text x="48" y="42" font-family="Verdana" font-weight="700" font-size="34" fill="#0F1113">Behoof</text>
                     </svg>
                 </div>
-                <div class="logo-text">Сравнивай, выбирай, экономь</div>
+                <div class="logo-text">1.8 млн товаров в 2272 магазинах</div>
             </div>
             <div class="search-section">
                 <button class="catalog-btn">Каталог товаров ⌵</button>
@@ -32,17 +33,19 @@
         </header>
 
         <div class="container">
+            <!-- Banners -->
             <div class="banners-row">
                 <div class="banner-main">
                     <h1>Сравнивайте технику с умом</h1>
-                    <button class="btn-red">Каталог товаров →</button>
+                    <button class="btn-red" onclick="alert('Открыть каталог')">Каталог товаров →</button>
                 </div>
                 <div class="banner-small">
                     <h3>Более 5000 честных обзоров</h3>
-                    <button class="btn-red">Смотреть →</button>
+                    <button class="btn-red" onclick="alert('Смотреть обзоры')">Смотреть →</button>
                 </div>
             </div>
 
+            <!-- Categories -->
             <div class="categories">
                 <div class="section-header">
                     <h2 class="section-title">Популярные категории</h2>
@@ -51,6 +54,7 @@
                 <div class="cat-grid" id="categoriesGrid"></div>
             </div>
 
+            <!-- Top 10 Block -->
             <div class="top10-block">
                 <div class="section-header">
                     <h2 class="section-title">Топ-10 смартфонов 2025</h2>
@@ -59,16 +63,19 @@
                 <div class="top10-grid" id="top10Grid"></div>
             </div>
 
+            <!-- Statistics -->
             <div class="stats-promo" id="statsGrid"></div>
 
+            <!-- App Promo -->
             <div class="app-promo">
                 <h2>Экономьте свое время и получайте максимум от ежедневных покупок</h2>
                 <div class="store-buttons">
-                    <div class="store-btn">📱 Google Play</div>
-                    <div class="store-btn">🍏 App Store</div>
+                    <div class="store-btn" onclick="alert('Скачать Google Play')">📱 Google Play</div>
+                    <div class="store-btn" onclick="alert('Скачать App Store')">🍏 App Store</div>
                 </div>
             </div>
 
+            <!-- New Products -->
             <div class="categories">
                 <div class="section-header">
                     <h2 class="section-title">🔥 Новинки техники</h2>
@@ -77,6 +84,7 @@
                 <div class="product-slider" id="newProductsGrid"></div>
             </div>
 
+            <!-- Reviews -->
             <div class="categories">
                 <div class="section-header">
                     <h2 class="section-title">📝 Обзоры и видео</h2>
@@ -86,6 +94,7 @@
             </div>
         </div>
 
+        <!-- Footer -->
         <footer class="footer-new">
             <div class="footer-inner">
                 <div class="footer-col">
@@ -126,6 +135,7 @@
         </footer>
     </div>
 
+    <!-- Modal Window -->
     <div id="catalogModal" class="catalog-modal">
         <div class="catalog-modal-content">
             <div class="modal-header">
@@ -155,13 +165,17 @@
         
         document.addEventListener('click', function(e) {
             const modal = document.getElementById('catalogModal');
-            if (e.target === modal) closeCatalogModal();
+            if (e.target === modal) {
+                closeCatalogModal();
+            }
         });
         
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 const modal = document.getElementById('catalogModal');
-                if (modal.classList.contains('active')) closeCatalogModal();
+                if (modal.classList.contains('active')) {
+                    closeCatalogModal();
+                }
             }
         });
     </script>
