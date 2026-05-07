@@ -3,9 +3,63 @@
     padding: 0;
     box-sizing: border-box;
 }
+.empty-image-smartphone {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    opacity: 0.3;
+}
 
+.empty-image-laptop {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    opacity: 0.3;
+}
+
+.empty-image-tablet {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    opacity: 0.3;
+}
+
+.empty-image-earphones {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    opacity: 0.3;
+}
+
+.empty-image-tv {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    opacity: 0.3;
+}
+
+.empty-image-watch {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    opacity: 0.3;
+}
+
+.empty-image-phone {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #FF4D4D 0%, #FF6B6B 100%);
+    opacity: 0.3;
+}
+
+.empty-image-review {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    opacity: 0.5;
+}
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     background: #FFFFFF;
 }
 
