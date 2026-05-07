@@ -198,63 +198,6 @@ function renderAll() {
     renderNewProducts();
     renderReviews();
 }
-// ============================================
-// Отрисовка сайта
-// ============================================
-
-// ============================================
-// 1. Категории
-// ============================================
-function renderCategories() {
-    const container = document.getElementById('categoriesGrid');
-    if (!container) return;
-    
-    container.innerHTML = categoriesData.map(cat => `
-        <div class="cat-item">
-            <div class="cat-img">
-                <img src="${cat.image_url || 'https://avatars.mds.yandex.net/i?id=b4d32f099cd1dd57c64c6372ea619e238e77f861-4578587-images-thumbs&n=13' + cat.name}" 
-                     alt="${cat.name}"
-                     onerror="this.src='https://placehold.co/124x124?text=📱'">
-            </div>
-            <div>${cat.name}</div>
-        </div>
-    `).join('');
-}
-
-// ============================================
-// 2. Топ товаров (для блока "Топ-10")
-// ============================================
-function renderTopProducts() {
-    const container = document.getElementById('top10Grid');
-    if (!container) return;
-    
-    const topProducts = productsData.filter(p => p.is_popular).slice(0, 6);
-    const smartphones = topProducts.filter(p => p.category_name === 'Смартфоны').slice(0, 3);
-    const laptops = topProducts.filter(p => p.category_name === 'Ноутбуки').slice(0, 3);
-    
-    container.innerHTML = `
-        <div class="top10-col">
-            <h4>Смартфоны</h4>
-            <ul>
-                ${smartphones.map(p => `<li>• ${p.name}</li>`).join('')}
-            </ul>
-        </div>
-        <div class="top10-col">
-            <h4>Ноутбуки</h4>
-            <ul>
-                ${laptops.map(p => `<li>• ${p.name}</li>`).join('')}
-            </ul>
-        </div>
-        <div class="top10-col">
-            <h4>Наушники и аксессуары</h4>
-            <ul>
-                <li>• Sony WH-1000XM5</li>
-                <li>• Apple AirPods Pro 2</li>
-                <li>• Samsung Buds2 Pro</li>
-            </ul>
-        </div>
-    `;
-}
 
 // ============================================
 // 3. Статистика
@@ -269,59 +212,6 @@ function renderStats() {
         <div class="stat-card"><div class="stat-number">${formatNumber(statsData.reviews_count || 12500)}+</div><div>честных обзоров</div></div>
         <div class="stat-card"><div class="stat-number">${formatNumber(statsData.customers_count || 15000)}+</div><div>довольных клиентов</div></div>
     `;
-}
-
-// ============================================
-// 4. Новинки
-// ============================================
-function renderNewProducts() {
-    const container = document.getElementById('newProductsGrid');
-    if (!container) return;
-    
-    const newProducts = productsData.filter(p => p.is_new).slice(0, 6);
-    
-    container.innerHTML = newProducts.map(product => `
-        <div class="product-card">
-            <img class="product-img" 
-                 src="${product.image_url || 'https://avatars.mds.yandex.net/i?id=ad5ad5beb9abfc53c2252a84ddd3e093bb1e98a7-10355051-images-thumbs&n=13' + product.name}" 
-                 alt="${product.name}"
-                 onerror="this.src='https://placehold.co/232x156?text=📱'">
-            <div class="product-category">${product.category_name}</div>
-            <div class="product-name">${product.name}</div>
-            <div class="price-block">
-                <span class="current-price">${formatPrice(product.price)} ₽</span>
-                ${product.old_price ? `<span class="old-price">${formatPrice(product.old_price)} ₽</span>` : ''}
-            </div>
-            <div class="action-icons">
-                <div class="like-btn" data-id="${product.id}">❤️</div>
-                <div class="compare-btn" data-id="${product.id}">📊</div>
-            </div>
-        </div>
-    `).join('');
-    
-    // Привязываем обработчики лайков
-    attachLikeHandlers();
-}
-
-// ============================================
-// 5. Обзоры
-// ============================================
-function renderReviews() {
-    const container = document.getElementById('reviewsGrid');
-    if (!container) return;
-    
-    const displayReviews = reviewsData.slice(0, 4);
-    
-    container.innerHTML = displayReviews.map(review => `
-        <div class="review-card" onclick="alert('Обзор: ${review.title}')">
-            <div class="review-img" style="background-image: url('${review.image_url || 'https://avatars.mds.yandex.net/i?id=f5545fd438f77b909fe88fc8809369d64dfde207-9150622-images-thumbs&n=13'}')"></div>
-            <div class="review-content">
-                <div class="review-title">${review.title}</div>
-                <div class="review-excerpt">${review.excerpt}</div>
-                <a href="#" class="view-link">Смотреть →</a>
-            </div>
-        </div>
-    `).join('');
 }
 
 // ============================================
