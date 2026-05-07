@@ -84,6 +84,9 @@ function renderAll() {
     renderNewProducts();
     renderReviews();
 }
+// ============================================
+// Отрисовка сайта
+// ============================================
 
 // ============================================
 // 1. Категории
@@ -95,7 +98,7 @@ function renderCategories() {
     container.innerHTML = categoriesData.map(cat => `
         <div class="cat-item">
             <div class="cat-img">
-                <img src="${cat.image_url || 'https://placehold.co/124x124?text=' + cat.name}" 
+                <img src="${cat.image_url || 'https://avatars.mds.yandex.net/i?id=b4d32f099cd1dd57c64c6372ea619e238e77f861-4578587-images-thumbs&n=13' + cat.name}" 
                      alt="${cat.name}"
                      onerror="this.src='https://placehold.co/124x124?text=📱'">
             </div>
@@ -166,7 +169,7 @@ function renderNewProducts() {
     container.innerHTML = newProducts.map(product => `
         <div class="product-card">
             <img class="product-img" 
-                 src="${product.image_url || 'https://placehold.co/232x156?text=' + product.name}" 
+                 src="${product.image_url || 'https://avatars.mds.yandex.net/i?id=ad5ad5beb9abfc53c2252a84ddd3e093bb1e98a7-10355051-images-thumbs&n=13' + product.name}" 
                  alt="${product.name}"
                  onerror="this.src='https://placehold.co/232x156?text=📱'">
             <div class="product-category">${product.category_name}</div>
@@ -197,7 +200,7 @@ function renderReviews() {
     
     container.innerHTML = displayReviews.map(review => `
         <div class="review-card" onclick="alert('Обзор: ${review.title}')">
-            <div class="review-img" style="background-image: url('${review.image_url || 'https://placehold.co/342x200?text=Обзор'}')"></div>
+            <div class="review-img" style="background-image: url('${review.image_url || 'https://avatars.mds.yandex.net/i?id=f5545fd438f77b909fe88fc8809369d64dfde207-9150622-images-thumbs&n=13'}')"></div>
             <div class="review-content">
                 <div class="review-title">${review.title}</div>
                 <div class="review-excerpt">${review.excerpt}</div>
