@@ -36,10 +36,13 @@
             { id: 1, name: "iPhone 15 Pro Max", brand: "apple", price: 144990, old_price: 159990, rating: 4.8, category: "flagship", image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=400&fit=crop", is_new: true, is_hot: true },
             { id: 2, name: "iPhone 15 Pro", brand: "apple", price: 119990, old_price: 129990, rating: 4.7, category: "flagship", image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=400&h=400&fit=crop", is_new: true, is_hot: false },
             { id: 3, name: "iPhone 15 Plus", brand: "apple", price: 99990, old_price: 109990, rating: 4.6, category: "flagship", image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop", is_new: true, is_hot: false },
-            { id: 4, name: "Samsung Galaxy S24 Ultra", brand: "samsung", price: 139990, old_price: 159990, rating: 4.9, category: "flagship", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&h=400&fit=crop", is_new: true, is_hot: true },
-            { id: 5, name: "Samsung Galaxy S24+", brand: "samsung", price: 109990, old_price: 124990, rating: 4.7, category: "flagship", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400&h=400&fit=crop", is_new: true, is_hot: false },
-            { id: 6, name: "Google Pixel 8 Pro", brand: "google", price: 99990, old_price: 114990, rating: 4.8, category: "flagship", image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop", is_new: true, is_hot: true },
-            { id: 7, name: "Xiaomi 13T Pro", brand: "xiaomi", price: 59990, old_price: 69990, rating: 4.6, category: "budget", image: "https://images.unsplash.com/photo-1606728035253-49e8a231cde5?w=400&h=400&fit=crop", is_new: false, is_hot: true }
+            { id: 4, name: "iPhone 15", brand: "apple", price: 79990, old_price: 89990, rating: 4.5, category: "flagship", image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=400&h=400&fit=crop", is_new: true, is_hot: false },
+            { id: 5, name: "Samsung Galaxy S24 Ultra", brand: "samsung", price: 139990, old_price: 159990, rating: 4.9, category: "flagship", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&h=400&fit=crop", is_new: true, is_hot: true },
+            { id: 6, name: "Samsung Galaxy S24+", brand: "samsung", price: 109990, old_price: 124990, rating: 4.7, category: "flagship", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400&h=400&fit=crop", is_new: true, is_hot: false },
+            { id: 7, name: "Samsung Galaxy S24", brand: "samsung", price: 89990, old_price: 99990, rating: 4.6, category: "flagship", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&h=400&fit=crop", is_new: true, is_hot: false },
+            { id: 8, name: "Google Pixel 8 Pro", brand: "google", price: 99990, old_price: 114990, rating: 4.8, category: "flagship", image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop", is_new: true, is_hot: true },
+            { id: 9, name: "Google Pixel 8", brand: "google", price: 69990, old_price: 79990, rating: 4.6, category: "flagship", image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop", is_new: true, is_hot: false },
+            { id: 10, name: "Xiaomi 13T Pro", brand: "xiaomi", price: 59990, old_price: 69990, rating: 4.6, category: "budget", image: "https://images.unsplash.com/photo-1606728035253-49e8a231cde5?w=400&h=400&fit=crop", is_new: false, is_hot: true }
         ];
         
         let currentFilter = "all";
@@ -47,25 +50,47 @@
         const itemsPerPage = 6;
         let likedPhones = JSON.parse(localStorage.getItem('behoof_liked_phones')) || {};
         
-        function saveLikes() { localStorage.setItem('behoof_liked_phones', JSON.stringify(likedPhones)); }
+        function saveLikes() {
+            localStorage.setItem('behoof_liked_phones', JSON.stringify(likedPhones));
+        }
+        
         function toggleLike(phoneId) {
-            if (likedPhones[phoneId]) delete likedPhones[phoneId];
-            else likedPhones[phoneId] = true;
+            if (likedPhones[phoneId]) {
+                delete likedPhones[phoneId];
+            } else {
+                likedPhones[phoneId] = true;
+            }
             saveLikes();
             renderProducts();
         }
-        function isLiked(phoneId) { return likedPhones[phoneId] === true; }
+        
+        function isLiked(phoneId) {
+            return likedPhones[phoneId] === true;
+        }
         
         function getFilteredProducts() {
             let filtered = [...phonesDatabase];
             switch(currentFilter) {
-                case "apple": filtered = filtered.filter(p => p.brand === "apple"); break;
-                case "samsung": filtered = filtered.filter(p => p.brand === "samsung"); break;
-                case "google": filtered = filtered.filter(p => p.brand === "google"); break;
-                case "xiaomi": filtered = filtered.filter(p => p.brand === "xiaomi"); break;
-                case "budget": filtered = filtered.filter(p => p.price <= 50000); break;
-                case "flagship": filtered = filtered.filter(p => p.category === "flagship"); break;
-                default: break;
+                case "apple":
+                    filtered = filtered.filter(p => p.brand === "apple");
+                    break;
+                case "samsung":
+                    filtered = filtered.filter(p => p.brand === "samsung");
+                    break;
+                case "google":
+                    filtered = filtered.filter(p => p.brand === "google");
+                    break;
+                case "xiaomi":
+                    filtered = filtered.filter(p => p.brand === "xiaomi");
+                    break;
+                case "budget":
+                    filtered = filtered.filter(p => p.price <= 50000);
+                    break;
+                case "flagship":
+                    filtered = filtered.filter(p => p.category === "flagship");
+                    break;
+                default:
+                    break;
             }
             return filtered;
         }
@@ -75,7 +100,9 @@
             return products.slice(start, start + itemsPerPage);
         }
         
-        function getTotalPages(products) { return Math.ceil(products.length / itemsPerPage); }
+        function getTotalPages(products) {
+            return Math.ceil(products.length / itemsPerPage);
+        }
         
         function renderProducts() {
             const filtered = getFilteredProducts();
@@ -119,7 +146,8 @@
             document.querySelectorAll('.btn-like').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    toggleLike(parseInt(btn.dataset.id));
+                    const id = parseInt(btn.dataset.id);
+                    toggleLike(id);
                 });
             });
             
@@ -135,7 +163,10 @@
         
         function renderPagination(totalPages) {
             const paginationContainer = document.getElementById('pagination');
-            if (totalPages <= 1) { paginationContainer.style.display = 'none'; return; }
+            if (totalPages <= 1) {
+                paginationContainer.style.display = 'none';
+                return;
+            }
             paginationContainer.style.display = 'flex';
             let buttons = '';
             for (let i = 1; i <= totalPages; i++) {
@@ -152,9 +183,10 @@
         }
         
         function initFilters() {
-            document.querySelectorAll('.filter-chip').forEach(filter => {
+            const filters = document.querySelectorAll('.filter-chip');
+            filters.forEach(filter => {
                 filter.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-chip').forEach(f => f.classList.remove('active'));
+                    filters.forEach(f => f.classList.remove('active'));
                     filter.classList.add('active');
                     currentFilter = filter.dataset.filter;
                     currentPage = 1;
