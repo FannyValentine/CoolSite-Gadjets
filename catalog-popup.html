@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Behoof — Каталог телефонов</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="catalog-page">
-        <!-- Шапка каталога -->
         <div class="catalog-header">
             <h1>📱 Каталог смартфонов</h1>
             <p>Выберите идеальный телефон среди сотни моделей</p>
         </div>
         
-        <!-- Секция фильтров -->
         <div class="filter-section">
             <h3>Фильтры</h3>
             <div class="filter-grid">
@@ -27,34 +27,27 @@
             </div>
         </div>
         
-        <!-- Сетка товаров -->
-        <div class="products-grid" id="productsGrid">
-            <!-- Товары загружаются через JavaScript -->
-        </div>
+        <div class="products-grid" id="productsGrid"></div>
         
-        <!-- Пагинация -->
-        <div class="pagination" id="pagination">
-            <!-- Кнопки пагинации загружаются через JavaScript -->
-        </div>
+        <div class="pagination" id="pagination"></div>
     </div>
     
     <script>
-        // База данных телефонов
         const phonesDatabase = [
-            { id: 1, name: "iPhone 15 Pro Max", brand: "apple", price: 144990, old_price: 159990, rating: 4.8, category: "flagship", image: "", description: "Титановый корпус, чип A17 Pro, 5 камер", is_new: true, is_hot: true },
-            { id: 2, name: "iPhone 15 Pro", brand: "apple", price: 119990, old_price: 129990, rating: 4.7, category: "flagship", image: "", description: "Лёгкий, мощный, профессиональная камера", is_new: true, is_hot: false },
-            { id: 3, name: "iPhone 15 Plus", brand: "apple", price: 99990, old_price: 109990, rating: 4.6, category: "flagship", image: "", description: "Большой экран, отличная автономность", is_new: true, is_hot: false },
-            { id: 4, name: "iPhone 15", brand: "apple", price: 79990, old_price: 89990, rating: 4.5, category: "flagship", image: "", description: "Динамический остров, USB-C", is_new: true, is_hot: false },
-            { id: 5, name: "Samsung Galaxy S24 Ultra", brand: "samsung", price: 139990, old_price: 159990, rating: 4.9, category: "flagship", image: "", description: "S-Pen, 200MP камера, AI функции", is_new: true, is_hot: true },
-            { id: 6, name: "Samsung Galaxy S24+", brand: "samsung", price: 109990, old_price: 124990, rating: 4.7, category: "flagship", image: "", description: "Большой дисплей, мощный процессор", is_new: true, is_hot: false },
-            { id: 7, name: "Samsung Galaxy S24", brand: "samsung", price: 89990, old_price: 99990, rating: 4.6, category: "flagship", image: "", description: "Компактный флагман", is_new: true, is_hot: false },
-            { id: 8, name: "Samsung Galaxy A54", brand: "samsung", price: 34990, old_price: 39990, rating: 4.4, category: "budget", image: "", description: "Лучший среднебюджетник", is_new: false, is_hot: false },
-            { id: 9, name: "Google Pixel 8 Pro", brand: "google", price: 99990, old_price: 114990, rating: 4.8, category: "flagship", image: "", description: "Лучшая камера, чистый Android", is_new: true, is_hot: true },
-            { id: 10, name: "Google Pixel 8", brand: "google", price: 69990, old_price: 79990, rating: 4.6, category: "flagship", image: "", description: "Компактный, мощный", is_new: true, is_hot: false },
-            { id: 11, name: "Google Pixel 7a", brand: "google", price: 44990, old_price: 49990, rating: 4.5, category: "budget", image: "", description: "Отличный бюджетный вариант", is_new: false, is_hot: false },
-            { id: 12, name: "Xiaomi 13T Pro", brand: "xiaomi", price: 59990, old_price: 69990, rating: 4.6, category: "budget", image: "", description: "120W зарядка, 144Hz экран", is_new: false, is_hot: true },
-            { id: 13, name: "Xiaomi 13 Ultra", brand: "xiaomi", price: 89990, old_price: 99990, rating: 4.7, category: "flagship", image: "", description: "Leica камера", is_new: false, is_hot: false },
-            { id: 14, name: "Xiaomi Poco F5", brand: "xiaomi", price: 34990, old_price: 39990, rating: 4.4, category: "budget", image: "", description: "Лучший игровой бюджетник", is_new: false, is_hot: false }
+            { id: 1, name: "iPhone 15 Pro Max", brand: "apple", price: 144990, old_price: 159990, rating: 4.8, category: "flagship", is_new: true, is_hot: true },
+            { id: 2, name: "iPhone 15 Pro", brand: "apple", price: 119990, old_price: 129990, rating: 4.7, category: "flagship", is_new: true, is_hot: false },
+            { id: 3, name: "iPhone 15 Plus", brand: "apple", price: 99990, old_price: 109990, rating: 4.6, category: "flagship", is_new: true, is_hot: false },
+            { id: 4, name: "iPhone 15", brand: "apple", price: 79990, old_price: 89990, rating: 4.5, category: "flagship", is_new: true, is_hot: false },
+            { id: 5, name: "Samsung Galaxy S24 Ultra", brand: "samsung", price: 139990, old_price: 159990, rating: 4.9, category: "flagship", is_new: true, is_hot: true },
+            { id: 6, name: "Samsung Galaxy S24+", brand: "samsung", price: 109990, old_price: 124990, rating: 4.7, category: "flagship", is_new: true, is_hot: false },
+            { id: 7, name: "Samsung Galaxy S24", brand: "samsung", price: 89990, old_price: 99990, rating: 4.6, category: "flagship", is_new: true, is_hot: false },
+            { id: 8, name: "Samsung Galaxy A54", brand: "samsung", price: 34990, old_price: 39990, rating: 4.4, category: "budget", is_new: false, is_hot: false },
+            { id: 9, name: "Google Pixel 8 Pro", brand: "google", price: 99990, old_price: 114990, rating: 4.8, category: "flagship", is_new: true, is_hot: true },
+            { id: 10, name: "Google Pixel 8", brand: "google", price: 69990, old_price: 79990, rating: 4.6, category: "flagship", is_new: true, is_hot: false },
+            { id: 11, name: "Google Pixel 7a", brand: "google", price: 44990, old_price: 49990, rating: 4.5, category: "budget", is_new: false, is_hot: false },
+            { id: 12, name: "Xiaomi 13T Pro", brand: "xiaomi", price: 59990, old_price: 69990, rating: 4.6, category: "budget", is_new: false, is_hot: true },
+            { id: 13, name: "Xiaomi 13 Ultra", brand: "xiaomi", price: 89990, old_price: 99990, rating: 4.7, category: "flagship", is_new: false, is_hot: false },
+            { id: 14, name: "Xiaomi Poco F5", brand: "xiaomi", price: 34990, old_price: 39990, rating: 4.4, category: "budget", is_new: false, is_hot: false }
         ];
         
         let currentFilter = "all";
@@ -62,7 +55,6 @@
         const itemsPerPage = 8;
         let likedPhones = JSON.parse(localStorage.getItem('behoof_liked_phones')) || {};
         
-        // Сохранение лайков
         function saveLikes() {
             localStorage.setItem('behoof_liked_phones', JSON.stringify(likedPhones));
         }
@@ -81,48 +73,29 @@
             return likedPhones[phoneId] === true;
         }
         
-        // Фильтрация товаров
         function getFilteredProducts() {
             let filtered = [...phonesDatabase];
-            
             switch(currentFilter) {
-                case "apple":
-                    filtered = filtered.filter(p => p.brand === "apple");
-                    break;
-                case "samsung":
-                    filtered = filtered.filter(p => p.brand === "samsung");
-                    break;
-                case "google":
-                    filtered = filtered.filter(p => p.brand === "google");
-                    break;
-                case "xiaomi":
-                    filtered = filtered.filter(p => p.brand === "xiaomi");
-                    break;
-                case "budget":
-                    filtered = filtered.filter(p => p.price <= 50000);
-                    break;
-                case "flagship":
-                    filtered = filtered.filter(p => p.category === "flagship");
-                    break;
-                default:
-                    break;
+                case "apple": filtered = filtered.filter(p => p.brand === "apple"); break;
+                case "samsung": filtered = filtered.filter(p => p.brand === "samsung"); break;
+                case "google": filtered = filtered.filter(p => p.brand === "google"); break;
+                case "xiaomi": filtered = filtered.filter(p => p.brand === "xiaomi"); break;
+                case "budget": filtered = filtered.filter(p => p.price <= 50000); break;
+                case "flagship": filtered = filtered.filter(p => p.category === "flagship"); break;
+                default: break;
             }
-            
             return filtered;
         }
         
-        // Пагинация
         function getPaginatedProducts(products) {
             const start = (currentPage - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            return products.slice(start, end);
+            return products.slice(start, start + itemsPerPage);
         }
         
         function getTotalPages(products) {
             return Math.ceil(products.length / itemsPerPage);
         }
         
-        // Отображение товаров
         function renderProducts() {
             const filtered = getFilteredProducts();
             const totalPages = getTotalPages(filtered);
@@ -130,16 +103,14 @@
             const container = document.getElementById('productsGrid');
             
             if (paginatedProducts.length === 0) {
-                container.innerHTML = '<div style="text-align: center; padding: 60px;">🔍 Товары не найдены</div>';
+                container.innerHTML = '<div class="no-products">🔍 Товары не найдены</div>';
                 return;
             }
             
             container.innerHTML = paginatedProducts.map(phone => `
                 <div class="product-item">
                     <div class="product-image">
-                        <img src="${phone.image || 'https://placehold.co/400x240?text=' + phone.name}" 
-                             alt="${phone.name}"
-                             onerror="this.src='https://placehold.co/400x240?text=📱'">
+                        <div class="empty-image"></div>
                         ${phone.is_new ? '<div class="product-badge new">NEW</div>' : ''}
                         ${phone.is_hot ? '<div class="product-badge hot">HOT</div>' : ''}
                     </div>
@@ -158,20 +129,16 @@
                             <button class="btn-like ${isLiked(phone.id) ? 'active' : ''}" data-id="${phone.id}">
                                 ${isLiked(phone.id) ? '❤️ В избранном' : '🤍 В избранное'}
                             </button>
-                            <button class="btn-compare" data-id="${phone.id}">
-                                📊 Сравнить
-                            </button>
+                            <button class="btn-compare" data-id="${phone.id}">📊 Сравнить</button>
                         </div>
                     </div>
                 </div>
             `).join('');
             
-            // Привязываем обработчики
             document.querySelectorAll('.btn-like').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    const id = parseInt(btn.dataset.id);
-                    toggleLike(id);
+                    toggleLike(parseInt(btn.dataset.id));
                 });
             });
             
@@ -191,16 +158,12 @@
                 paginationContainer.style.display = 'none';
                 return;
             }
-            
             paginationContainer.style.display = 'flex';
             let buttons = '';
-            
             for (let i = 1; i <= totalPages; i++) {
                 buttons += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
             }
-            
             paginationContainer.innerHTML = buttons;
-            
             document.querySelectorAll('.page-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     currentPage = parseInt(btn.dataset.page);
@@ -210,12 +173,10 @@
             });
         }
         
-        // Фильтры
         function initFilters() {
-            const filters = document.querySelectorAll('.filter-chip');
-            filters.forEach(filter => {
+            document.querySelectorAll('.filter-chip').forEach(filter => {
                 filter.addEventListener('click', () => {
-                    filters.forEach(f => f.classList.remove('active'));
+                    document.querySelectorAll('.filter-chip').forEach(f => f.classList.remove('active'));
                     filter.classList.add('active');
                     currentFilter = filter.dataset.filter;
                     currentPage = 1;
@@ -224,7 +185,6 @@
             });
         }
         
-        // Инициализация
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
             initFilters();
