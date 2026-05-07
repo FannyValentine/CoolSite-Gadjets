@@ -17,7 +17,7 @@
         "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=600&fit=crop",
         "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&h=600&fit=crop"
       ],
-      "description": "Титановый корпус, чип A17 Pro, 5 камер"
+      "description": "Титановый корпус, чип A17 Pro, 48MP камера"
     },
     {
       "id": 2,
@@ -35,7 +35,7 @@
       "gallery": [
         "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=600&h=600&fit=crop"
       ],
-      "description": "S-Pen, 200MP камера, AI функции"
+      "description": "S-Pen, 200MP камера, AI функции, титановый корпус"
     },
     {
       "id": 3,
@@ -51,7 +51,7 @@
       "stock": 12,
       "image_url": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=300&h=300&fit=crop",
       "gallery": [],
-      "description": "Лучшая камера среди Android и чистый Google Experience"
+      "description": "Лучшая камера среди Android, чистый Google Experience, AI функции"
     },
     {
       "id": 4,
@@ -85,7 +85,7 @@
       "stock": 5,
       "image_url": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=300&h=300&fit=crop",
       "gallery": [],
-      "description": "Игровой ноутбук с RTX 4070 и частотой обновления 240Hz"
+      "description": "Игровой ноутбук с RTX 4070, 240Hz дисплей"
     },
     {
       "id": 6,
@@ -101,7 +101,7 @@
       "stock": 7,
       "image_url": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=300&h=300&fit=crop",
       "gallery": [],
-      "description": "Ультрабук с OLED дисплеем и отличной производительностью"
+      "description": "Ультрабук с OLED дисплеем, Intel Core i9"
     },
     {
       "id": 7,
@@ -165,15 +165,45 @@
       "stock": 15,
       "image_url": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=300&h=300&fit=crop",
       "gallery": [],
-      "description": "Прочные часы для экстремальных условий с ярким дисплеем"
+      "description": "Прочные часы для экстремальных условий"
     }
   ],
   "categories": [
-    { "id": 1, "name": "Смартфоны", "slug": "smartfony", "icon": "📱", "image_url": "https://images.unsplash.com/photo-1592899677977-9e10cb588d97?w=164&h=164&fit=crop" },
-    { "id": 2, "name": "Ноутбуки", "slug": "noutbuki", "icon": "💻", "image_url": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=164&h=164&fit=crop" },
-    { "id": 3, "name": "Наушники", "slug": "naushniki", "icon": "🎧", "image_url": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=164&h=164&fit=crop" },
-    { "id": 4, "name": "Телевизоры", "slug": "televizory", "icon": "📺", "image_url": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=164&h=164&fit=crop" },
-    { "id": 5, "name": "Умные часы", "slug": "umnye-chasy", "icon": "⌚", "image_url": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=164&h=164&fit=crop" }
+    {
+      "id": 1,
+      "name": "Смартфоны",
+      "slug": "smartfony",
+      "icon": "📱",
+      "image_url": "https://images.unsplash.com/photo-1592899677977-9e10cb588d97?w=164&h=164&fit=crop"
+    },
+    {
+      "id": 2,
+      "name": "Ноутбуки",
+      "slug": "noutbuki",
+      "icon": "💻",
+      "image_url": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=164&h=164&fit=crop"
+    },
+    {
+      "id": 3,
+      "name": "Наушники",
+      "slug": "naushniki",
+      "icon": "🎧",
+      "image_url": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=164&h=164&fit=crop"
+    },
+    {
+      "id": 4,
+      "name": "Телевизоры",
+      "slug": "televizory",
+      "icon": "📺",
+      "image_url": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=164&h=164&fit=crop"
+    },
+    {
+      "id": 5,
+      "name": "Умные часы",
+      "slug": "umnye-chasy",
+      "icon": "⌚",
+      "image_url": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=164&h=164&fit=crop"
+    }
   ],
   "reviews": [
     {
@@ -187,7 +217,7 @@
     {
       "id": 2,
       "title": "Топ-5 игровых ноутбуков 2025",
-      "excerpt": "Выбираем лучший ноутбук для игр и работы",
+      "excerpt": "Выбираем лучший ноутбук для игр и работы. RTX 40 серия",
       "image_url": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=342&h=200&fit=crop",
       "product_id": 5,
       "date": "2024-01-20"
@@ -203,7 +233,7 @@
     {
       "id": 4,
       "title": "Лучшие наушники 2025 года",
-      "excerpt": "Sony, Apple, Samsung — что выбрать?",
+      "excerpt": "Sony, Apple, Samsung — что выбрать для музыки и спорта?",
       "image_url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=342&h=200&fit=crop",
       "product_id": 7,
       "date": "2024-02-01"
