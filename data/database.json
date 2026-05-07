@@ -12,10 +12,12 @@
       "is_new": true,
       "is_popular": true,
       "stock": 25,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
+      "image_url": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=300&h=300&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&h=600&fit=crop"
+      ],
+      "description": "Титановый корпус, чип A17 Pro, 5 камер"
     },
     {
       "id": 2,
@@ -29,10 +31,11 @@
       "is_new": true,
       "is_popular": true,
       "stock": 18,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
+      "image_url": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=300&h=300&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=600&h=600&fit=crop"
+      ],
+      "description": "S-Pen, 200MP камера, AI функции"
     },
     {
       "id": 3,
@@ -46,10 +49,9 @@
       "is_new": true,
       "is_popular": false,
       "stock": 12,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
+      "image_url": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=300&h=300&fit=crop",
+      "gallery": [],
+      "description": "Лучшая камера среди Android и чистый Google Experience"
     },
     {
       "id": 4,
@@ -63,10 +65,11 @@
       "is_new": true,
       "is_popular": true,
       "stock": 8,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
+      "image_url": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=300&h=300&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=600&fit=crop"
+      ],
+      "description": "Мощнейший ноутбук для профессионалов с чипом M3 Pro"
     },
     {
       "id": 5,
@@ -80,10 +83,9 @@
       "is_new": true,
       "is_popular": false,
       "stock": 5,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
+      "image_url": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=300&h=300&fit=crop",
+      "gallery": [],
+      "description": "Игровой ноутбук с RTX 4070 и частотой обновления 240Hz"
     },
     {
       "id": 6,
@@ -97,10 +99,9 @@
       "is_new": false,
       "is_popular": true,
       "stock": 7,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
+      "image_url": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=300&h=300&fit=crop",
+      "gallery": [],
+      "description": "Ультрабук с OLED дисплеем и отличной производительностью"
     },
     {
       "id": 7,
@@ -114,10 +115,9 @@
       "is_new": false,
       "is_popular": true,
       "stock": 40,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
+      "image_url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=300&h=300&fit=crop",
+      "gallery": [],
+      "description": "Лучшие шумоподавляющие наушники с высоким качеством звука"
     },
     {
       "id": 8,
@@ -131,10 +131,9 @@
       "is_new": true,
       "is_popular": true,
       "stock": 35,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
+      "image_url": "https://images.unsplash.com/photo-1606220588913-b3aac6ab4f6f?w=300&h=300&fit=crop",
+      "gallery": [],
+      "description": "Активное шумоподавление, пространственное аудио"
     },
     {
       "id": 9,
@@ -148,30 +147,12 @@
       "is_new": false,
       "is_popular": true,
       "stock": 10,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
+      "image_url": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=300&h=300&fit=crop",
+      "gallery": [],
+      "description": "4K OLED телевизор с идеальным чёрным цветом"
     },
     {
       "id": 10,
-      "name": "Samsung QLED 4K 65",
-      "slug": "samsung-qled-65",
-      "category_id": 4,
-      "category_name": "Телевизоры",
-      "price": 99990,
-      "old_price": 119990,
-      "rating": 4.7,
-      "is_new": true,
-      "is_popular": false,
-      "stock": 6,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
-    },
-    {
-      "id": 11,
       "name": "Apple Watch Ultra 2",
       "slug": "apple-watch-ultra-2",
       "category_id": 5,
@@ -182,52 +163,32 @@
       "is_new": true,
       "is_popular": true,
       "stock": 15,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
-    },
-    {
-      "id": 12,
-      "name": "Samsung Galaxy Watch 6",
-      "slug": "galaxy-watch-6",
-      "category_id": 5,
-      "category_name": "Умные часы",
-      "price": 34990,
-      "old_price": 39990,
-      "rating": 4.6,
-      "is_new": true,
-      "is_popular": false,
-      "stock": 20,
-      "image_smartphone": "",
-      "image_tablet": "",
-      "image_laptop": "",
-      "description": ""
+      "image_url": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=300&h=300&fit=crop",
+      "gallery": [],
+      "description": "Прочные часы для экстремальных условий с ярким дисплеем"
     }
   ],
   "categories": [
-    { "id": 1, "name": "Смартфоны", "slug": "smartfony", "icon": "📱", "image_category": "" },
-    { "id": 2, "name": "Ноутбуки", "slug": "noutbuki", "icon": "💻", "image_category": "" },
-    { "id": 3, "name": "Наушники", "slug": "naushniki", "icon": "🎧", "image_category": "" },
-    { "id": 4, "name": "Телевизоры", "slug": "televizory", "icon": "📺", "image_category": "" },
-    { "id": 5, "name": "Умные часы", "slug": "umnye-chasy", "icon": "⌚", "image_category": "" }
+    { "id": 1, "name": "Смартфоны", "slug": "smartfony", "icon": "📱", "image_url": "https://images.unsplash.com/photo-1592899677977-9e10cb588d97?w=164&h=164&fit=crop" },
+    { "id": 2, "name": "Ноутбуки", "slug": "noutbuki", "icon": "💻", "image_url": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=164&h=164&fit=crop" },
+    { "id": 3, "name": "Наушники", "slug": "naushniki", "icon": "🎧", "image_url": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=164&h=164&fit=crop" },
+    { "id": 4, "name": "Телевизоры", "slug": "televizory", "icon": "📺", "image_url": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=164&h=164&fit=crop" },
+    { "id": 5, "name": "Умные часы", "slug": "umnye-chasy", "icon": "⌚", "image_url": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=164&h=164&fit=crop" }
   ],
   "reviews": [
     {
       "id": 1,
       "title": "Обзор iPhone 15 Pro Max",
       "excerpt": "Стоит ли обновляться с 14 Pro? Полный разбор флагмана Apple",
-      "image_review_main": "",
-      "image_review_gallery": ["", "", ""],
+      "image_url": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=342&h=200&fit=crop",
       "product_id": 1,
       "date": "2024-01-15"
     },
     {
       "id": 2,
       "title": "Топ-5 игровых ноутбуков 2025",
-      "excerpt": "Выбираем лучший ноутбук для игр и работы. RTX 40 серия",
-      "image_review_main": "",
-      "image_review_gallery": ["", "", ""],
+      "excerpt": "Выбираем лучший ноутбук для игр и работы",
+      "image_url": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=342&h=200&fit=crop",
       "product_id": 5,
       "date": "2024-01-20"
     },
@@ -235,37 +196,17 @@
       "id": 3,
       "title": "Samsung Galaxy S24 Ultra vs iPhone 15 Pro Max",
       "excerpt": "Сравнение флагманов: камера, батарея, производительность",
-      "image_review_main": "",
-      "image_review_gallery": ["", "", ""],
+      "image_url": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=342&h=200&fit=crop",
       "product_id": null,
       "date": "2024-01-25"
     },
     {
       "id": 4,
       "title": "Лучшие наушники 2025 года",
-      "excerpt": "Sony, Apple, Samsung — что выбрать для музыки и спорта?",
-      "image_review_main": "",
-      "image_review_gallery": ["", "", ""],
+      "excerpt": "Sony, Apple, Samsung — что выбрать?",
+      "image_url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=342&h=200&fit=crop",
       "product_id": 7,
       "date": "2024-02-01"
-    },
-    {
-      "id": 5,
-      "title": "OLED vs QLED: какой телевизор выбрать?",
-      "excerpt": "Сравнение технологий и лучшие модели 2025 года",
-      "image_review_main": "",
-      "image_review_gallery": ["", "", ""],
-      "product_id": 9,
-      "date": "2024-02-05"
-    },
-    {
-      "id": 6,
-      "title": "Обзор MacBook Pro M3",
-      "excerpt": "Новый чип, производительность и батарея — тест в реальных задачах",
-      "image_review_main": "",
-      "image_review_gallery": ["", "", ""],
-      "product_id": 4,
-      "date": "2024-02-10"
     }
   ],
   "stats": {
