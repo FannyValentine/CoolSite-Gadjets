@@ -1,21 +1,15 @@
-// script.js — с подключением к Supabase
-import { supabase, TABLES } from './supabase-config.js'
+// script.js
+import { supabase, TABLES, getAllProducts } from './supabase-config.js'
 
-// Глобальная переменная для всех товаров
 let allProducts = []
 let allCategories = []
 let allReviews = []
 
-// ============================================
-// ЗАГРУЗКА ДАННЫХ ИЗ SUPABASE
-// ============================================
-
 async function loadDatabase() {
     try {
-        // Показываем индикатор загрузки
         showLoader()
         
-        // 1. Загружаем товары
+        // Загружаем товары из Supabase
         const { data: products, error: productsError } = await supabase
             .from(TABLES.PRODUCTS)
             .select('*')
@@ -24,41 +18,26 @@ async function loadDatabase() {
         if (productsError) throw productsError
         allProducts = products || []
         
-        // 2. Загружаем категории
-        const { data: categories, error: categoriesError } = await supabase
-            .from(TABLES.CATEGORIES)
-            .select('*')
+        // Загружаем категории из JSON (или можно тоже из Supabase)
+        const response = await fetch('data/database.json')
+        const data = await response.json()
+        allCategories = data.categories
+        allReviews = data.reviews
         
-        if (categoriesError) throw categoriesError
-        allCategories = categories || []
+        console.log(`✅ Загружено ${allProducts.length} товаров из Supabase`)
         
-        // 3. Загружаем обзоры
-        const { data: reviews, error: reviewsError } = await supabase
-            .from(TABLES.REVIEWS)
-            .select('*')
-        
-        if (reviewsError) throw reviewsError
-        allReviews = reviews || []
-        
-        // 4. Отрисовываем все секции
         renderCategories(allCategories)
         renderStats()
         renderNewProducts(allProducts)
         renderReviews(allReviews)
         renderTopProducts(allProducts)
         
-        console.log(`✅ Загружено: ${allProducts.length} товаров, ${allCategories.length} категорий`)
         hideLoader()
-        
     } catch (error) {
-        console.error('Ошибка загрузки из Supabase:', error)
+        console.error('Ошибка загрузки:', error)
         showErrorMessage(error.message)
     }
 }
-
-// ============================================
-// ОТРИСОВКА КОМПОНЕНТОВ
-// ============================================
 
 function renderCategories(categories) {
     const container = document.getElementById('categoriesGrid')
@@ -81,7 +60,7 @@ function renderStats() {
     
     container.innerHTML = `
         <div class="stat-card">
-            <div class="stat-number">${allProducts.length.toLocaleString()}+</div>
+            <div class="stat-number">${allProducts.length}+</div>
             <div>товаров в каталоге</div>
         </div>
         <div class="stat-card">
@@ -93,7 +72,7 @@ function renderStats() {
             <div>довольных клиентов</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">${allReviews.length.toLocaleString()}+</div>
+            <div class="stat-number">5 380+</div>
             <div>честных обзоров</div>
         </div>
     `
@@ -106,7 +85,7 @@ function renderNewProducts(products) {
     const newProducts = products.filter(p => p.is_new === true).slice(0, 8)
     
     if (newProducts.length === 0) {
-        container.innerHTML = '<div class="empty-list">✨ Новинки появятся скоро</div>'
+        container.innerHTML = '<div class="empty-list" style="text-align:center;padding:40px;">✨ Новинки появятся скоро</div>'
         return
     }
     
@@ -120,7 +99,7 @@ function renderNewProducts(products) {
                 <span class="current-price">${product.price.toLocaleString('ru-RU')} ₽</span>
                 ${product.old_price ? `<span class="old-price">${product.old_price.toLocaleString('ru-RU')} ₽</span>` : ''}
             </div>
-            ${product.is_custom ? '<div class="custom-badge">✨ Добавлено вами</div>' : ''}
+            ${product.is_custom ? '<div style="font-size: 10px; color: #FF4D4D; margin-top: 8px;">✨ Добавлено вами</div>' : ''}
         </div>
     `).join('')
 }
@@ -179,154 +158,6 @@ function renderTopProducts(products) {
     `
 }
 
-// ============================================
-// ФУНКЦИИ РАБОТЫ С ТОВАРАМИ (CRUD)
-// ============================================
-
-// Добавление нового товара
-async function addProduct(productData) {
-    try {
-        // Проверяем подключение
-        if (!supabase) {
-            throw new Error('Supabase не инициализирован')
-        }
-        
-        const newProduct = {
-            name: productData.name,
-            slug: productData.name.toLowerCase().replace(/[^a-zа-яё0-9]+/g, '-') + '-' + Date.now(),
-            category_id: productData.category_id || 1,
-            category_name: productData.category_name,
-            price: productData.price,
-            old_price: productData.old_price || null,
-            rating: productData.rating || 4.5,
-            is_new: productData.is_new || false,
-            is_popular: productData.is_popular || false,
-            stock: productData.stock || 10,
-            image_url: productData.image_url,
-            gallery: productData.gallery || [productData.image_url],
-            description: productData.description || '',
-            specs: productData.specs || '',
-            is_custom: true,
-            created_at: new Date().toISOString()
-        }
-        
-        const { data, error } = await supabase
-            .from(TABLES.PRODUCTS)
-            .insert([newProduct])
-            .select()
-        
-        if (error) throw error
-        
-        console.log('✅ Товар добавлен:', data)
-        
-        // Обновляем локальный массив
-        allProducts.unshift(data[0])
-        
-        // Перерисовываем интерфейс
-        renderNewProducts(allProducts)
-        renderTopProducts(allProducts)
-        
-        return { success: true, data: data[0] }
-        
-    } catch (error) {
-        console.error('❌ Ошибка добавления товара:', error)
-        return { success: false, error: error.message }
-    }
-}
-
-// Обновление товара
-async function updateProduct(productId, updates) {
-    try {
-        const { data, error } = await supabase
-            .from(TABLES.PRODUCTS)
-            .update(updates)
-            .eq('id', productId)
-            .select()
-        
-        if (error) throw error
-        
-        // Обновляем локальный массив
-        const index = allProducts.findIndex(p => p.id === productId)
-        if (index !== -1) {
-            allProducts[index] = { ...allProducts[index], ...updates }
-        }
-        
-        renderNewProducts(allProducts)
-        renderTopProducts(allProducts)
-        
-        return { success: true, data: data[0] }
-        
-    } catch (error) {
-        console.error('Ошибка обновления:', error)
-        return { success: false, error: error.message }
-    }
-}
-
-// Удаление товара
-async function deleteProduct(productId) {
-    try {
-        const { error } = await supabase
-            .from(TABLES.PRODUCTS)
-            .delete()
-            .eq('id', productId)
-        
-        if (error) throw error
-        
-        // Удаляем из локального массива
-        allProducts = allProducts.filter(p => p.id !== productId)
-        
-        renderNewProducts(allProducts)
-        renderTopProducts(allProducts)
-        
-        return { success: true }
-        
-    } catch (error) {
-        console.error('Ошибка удаления:', error)
-        return { success: false, error: error.message }
-    }
-}
-
-// ============================================
-# Функции поиска и фильтрации
-// ============================================
-
-async function searchProducts(searchTerm) {
-    try {
-        const { data, error } = await supabase
-            .from(TABLES.PRODUCTS)
-            .select('*')
-            .ilike('name', `%${searchTerm}%`)
-            .limit(20)
-        
-        if (error) throw error
-        return data
-        
-    } catch (error) {
-        console.error('Ошибка поиска:', error)
-        return []
-    }
-}
-
-async function filterByCategory(categoryName) {
-    try {
-        const { data, error } = await supabase
-            .from(TABLES.PRODUCTS)
-            .select('*')
-            .eq('category_name', categoryName)
-        
-        if (error) throw error
-        return data
-        
-    } catch (error) {
-        console.error('Ошибка фильтрации:', error)
-        return []
-    }
-}
-
-// ============================================
-# ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-// ============================================
-
 function escapeHtml(str) {
     if (!str) return ''
     return str.replace(/[&<>]/g, function(m) {
@@ -340,8 +171,7 @@ function escapeHtml(str) {
 function showLoader() {
     const loader = document.createElement('div')
     loader.id = 'global-loader'
-    loader.innerHTML = '<div class="loader-spinner"></div>'
-    loader.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.9);z-index:9999;display:flex;justify-content:center;align-items:center'
+    loader.innerHTML = '<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.9);z-index:9999;display:flex;justify-content:center;align-items:center">⏳ Загрузка...</div>'
     document.body.appendChild(loader)
 }
 
@@ -351,28 +181,18 @@ function hideLoader() {
 }
 
 function showErrorMessage(message) {
-    const container = document.getElementById('reviewsGrid')
-    if (container) {
-        container.innerHTML = `<div class="error-message">⚠️ Ошибка: ${message}<br>Проверьте подключение к Supabase</div>`
-    }
+    console.error('Ошибка:', message)
 }
 
 function setupSearch() {
     const searchInput = document.querySelector('.search-bar input')
     if (searchInput) {
-        searchInput.addEventListener('input', async (e) => {
+        searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase()
-            if (query.length > 2) {
-                const results = await searchProducts(query)
-                console.log('Результаты поиска:', results)
-            }
+            console.log('Поиск:', query)
         })
     }
 }
-
-// ============================================
-# ИНИЦИАЛИЗАЦИЯ
-// ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
     loadDatabase()
