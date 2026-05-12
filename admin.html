@@ -3,26 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Behoof — Админ-панель: Добавление товара</title>
+    <title>Behoof — Админ-панель</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        .admin-container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .admin-header { background: linear-gradient(135deg, #FF4D4D 0%, #FF6B6B 100%); border-radius: 24px; padding: 40px; margin-bottom: 40px; text-align: center; color: white; }
+        .product-form { background: white; border-radius: 24px; padding: 32px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1px solid #E1E5EB; border-radius: 12px; font-family: 'Inter', sans-serif; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .btn-submit { background: #FF4D4D; color: white; border: none; padding: 16px; border-radius: 12px; font-weight: 600; cursor: pointer; width: 100%; }
+        .image-preview { width: 150px; height: 150px; border: 2px dashed #E1E5EB; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-top: 12px; overflow: hidden; background: #F6F7FA; }
+        .image-preview img { width: 100%; height: 100%; object-fit: cover; }
+        .success-message { background: #30D170; color: white; padding: 12px; border-radius: 12px; margin-bottom: 20px; display: none; }
+        .success-message.show { display: block; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #FF4D4D; text-decoration: none; }
+        .warning-note { background: #FFF3CD; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404; font-size: 14px; }
+    </style>
 </head>
 <body>
     <div class="admin-container">
         <a href="index.html" class="back-link">← На главную</a>
         
         <div class="admin-header">
-            <h1>➕ Добавление нового товара</h1>
-            <p>Заполните форму, чтобы добавить товар в каталог</p>
+            <h1>➕ Добавление товара</h1>
+            <p>Данные сохраняются в Supabase</p>
         </div>
         
-        <div id="successMessage" class="success-message">✅ Товар успешно добавлен!</div>
+        <div class="warning-note">
+            ⚠️ <strong>Постоянное хранение:</strong> Товары сохраняются в облачной базе данных Supabase<br>
+            Данные не пропадут при очистке кэша или смене устройства!
+        </div>
+        
+        <div id="successMessage" class="success-message">✅ Товар добавлен в базу данных!</div>
         
         <div class="product-form">
             <form id="productForm">
                 <div class="form-group">
                     <label>Название товара *</label>
-                    <input type="text" id="productName" required placeholder="Например: iPhone 15 Pro Max 256GB">
+                    <input type="text" id="productName" required placeholder="iPhone 15 Pro Max">
                 </div>
                 
                 <div class="form-row">
@@ -36,212 +57,98 @@
                     </div>
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Категория *</label>
-                        <select id="productCategory">
-                            <option value="Смартфоны">📱 Смартфоны</option>
-                            <option value="Ноутбуки">💻 Ноутбуки</option>
-                            <option value="Наушники">🎧 Наушники</option>
-                            <option value="Телевизоры">📺 Телевизоры</option>
-                            <option value="Умные часы">⌚ Умные часы</option>
-                            <option value="Планшеты">📱 Планшеты</option>
-                            <option value="Аксессуары">🔌 Аксессуары</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Рейтинг (1-5)</label>
-                        <input type="number" id="productRating" step="0.1" min="1" max="5" value="4.5" placeholder="4.5">
-                    </div>
+                <div class="form-group">
+                    <label>Категория *</label>
+                    <select id="productCategory">
+                        <option value="Смартфоны">📱 Смартфоны</option>
+                        <option value="Ноутбуки">💻 Ноутбуки</option>
+                        <option value="Наушники">🎧 Наушники</option>
+                        <option value="Телевизоры">📺 Телевизоры</option>
+                        <option value="Умные часы">⌚ Умные часы</option>
+                    </select>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>
-                            <input type="checkbox" id="productIsNew"> Новинка
-                        </label>
+                        <label><input type="checkbox" id="productIsNew"> Новинка</label>
                     </div>
                     <div class="form-group">
-                        <label>
-                            <input type="checkbox" id="productIsPopular"> Популярный
-                        </label>
+                        <label><input type="checkbox" id="productIsPopular"> Популярный</label>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label>URL изображения *</label>
-                    <input type="url" id="productImage" placeholder="https://images.unsplash.com/photo-...">
-                    <div class="image-preview" id="imagePreview">
-                        <span style="color: #A1ABB9;">Предпросмотр</span>
-                    </div>
+                    <input type="url" id="productImage" placeholder="https://images.unsplash.com/...">
+                    <div class="image-preview" id="imagePreview">Предпросмотр</div>
                 </div>
                 
                 <div class="form-group">
-                    <label>Описание товара</label>
-                    <textarea id="productDescription" placeholder="Краткое описание товара..."></textarea>
+                    <label>Описание</label>
+                    <textarea id="productDescription" rows="3" placeholder="Краткое описание товара..."></textarea>
                 </div>
                 
-                <div class="form-group">
-                    <label>Характеристики (через запятую)</label>
-                    <input type="text" id="productSpecs" placeholder="Процессор: A17 Pro, ОЗУ: 8GB, Память: 256GB">
-                </div>
-                
-                <button type="submit" class="btn-submit">➕ Добавить товар</button>
+                <button type="submit" class="btn-submit">💾 Сохранить в Supabase</button>
             </form>
-        </div>
-        
-        <div class="products-list">
-            <h3>📦 Список добавленных товаров</h3>
-            <div id="adminProductsList"></div>
         </div>
     </div>
     
-    <script>
-        // Загрузка товаров из localStorage
-        let customProducts = [];
+    <script type="module">
+        import { supabase, TABLES, addProduct } from './supabase-config.js'
         
-        function loadCustomProducts() {
-            const saved = localStorage.getItem('behoof_custom_products');
-            if (saved) {
-                customProducts = JSON.parse(saved);
-            } else {
-                customProducts = [];
-            }
-            renderAdminProductsList();
-        }
-        
-        function saveCustomProducts() {
-            localStorage.setItem('behoof_custom_products', JSON.stringify(customProducts));
-            // Также синхронизируем с основным JSON (для отображения на главной)
-            syncWithMainDatabase();
-        }
-        
-        function syncWithMainDatabase() {
-            // Получаем основные товары из localStorage или database.json
-            let allProducts = [...customProducts];
-            
-            // Загружаем встроенные товары
-            const defaultProducts = [
-                { id: 1, name: "Apple iPhone 15 Pro Max 256GB", category_name: "Смартфоны", price: 144990, old_price: 159990, rating: 4.8, is_new: true, is_popular: true, image_url: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=300&h=300&fit=crop", description: "Титановый корпус, чип A17 Pro" },
-                { id: 2, name: "Samsung Galaxy S24 Ultra 512GB", category_name: "Смартфоны", price: 129990, old_price: 149990, rating: 4.7, is_new: true, is_popular: true, image_url: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=300&h=300&fit=crop", description: "S-Pen, 200MP камера" },
-                { id: 3, name: "MacBook Pro 14 M3 Pro", category_name: "Ноутбуки", price: 199990, old_price: 229990, rating: 4.9, is_new: true, is_popular: true, image_url: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=300&h=300&fit=crop", description: "Чип M3 Pro" }
-            ];
-            
-            // Объединяем кастомные товары с дефолтными (кастомные имеют отрицательные ID)
-            const allForMain = [...defaultProducts, ...allProducts];
-            localStorage.setItem('behoof_all_products', JSON.stringify(allForMain));
-        }
-        
-        function renderAdminProductsList() {
-            const container = document.getElementById('adminProductsList');
-            if (!container) return;
-            
-            if (customProducts.length === 0) {
-                container.innerHTML = '<div class="empty-list">📭 Нет добавленных товаров. Создайте первый!</div>';
-                return;
-            }
-            
-            container.innerHTML = customProducts.map(product => `
-                <div class="admin-product-item">
-                    <div class="admin-product-info">
-                        <div class="admin-product-name">${product.name}</div>
-                        <div class="admin-product-price">${product.price.toLocaleString('ru-RU')} ₽</div>
-                        <div class="admin-product-category">${product.category_name}</div>
-                    </div>
-                    <button class="delete-btn" onclick="deleteProduct(${product.id})">🗑 Удалить</button>
-                </div>
-            `).join('');
-        }
-        
-        function deleteProduct(id) {
-            if (confirm('Вы уверены, что хотите удалить этот товар?')) {
-                customProducts = customProducts.filter(p => p.id !== id);
-                saveCustomProducts();
-                renderAdminProductsList();
-                showMessage('Товар удалён', '#FF4D4D');
-            }
-        }
-        
-        function showMessage(text, color = '#30D170') {
-            const msg = document.getElementById('successMessage');
-            msg.textContent = text;
-            msg.style.background = color;
-            msg.classList.add('show');
-            setTimeout(() => {
-                msg.classList.remove('show');
-            }, 3000);
+        function showMessage(text, isError = false) {
+            const msg = document.getElementById('successMessage')
+            msg.textContent = text
+            msg.style.background = isError ? '#FF4D4D' : '#30D170'
+            msg.classList.add('show')
+            setTimeout(() => msg.classList.remove('show'), 3000)
         }
         
         function previewImage() {
-            const url = document.getElementById('productImage').value;
-            const preview = document.getElementById('imagePreview');
-            if (url) {
-                preview.innerHTML = `<img src="${url}" alt="Предпросмотр" onerror="this.src='https://placehold.co/150x150?text=Ошибка+загрузки'">`;
+            const url = document.getElementById('productImage').value
+            const preview = document.getElementById('imagePreview')
+            if (url && url.startsWith('http')) {
+                preview.innerHTML = `<img src="${url}" onerror="this.src='https://placehold.co/150x150?text=Ошибка'">`
             } else {
-                preview.innerHTML = '<span style="color: #A1ABB9;">Предпросмотр</span>';
+                preview.innerHTML = 'Предпросмотр'
             }
         }
         
-        document.getElementById('productForm').addEventListener('submit', (e) => {
-            e.preventDefault();
+        document.getElementById('productImage').addEventListener('input', previewImage)
+        
+        document.getElementById('productForm').addEventListener('submit', async (e) => {
+            e.preventDefault()
             
-            // Получаем значения из формы
-            const name = document.getElementById('productName').value;
-            const price = parseFloat(document.getElementById('productPrice').value);
-            const old_price = document.getElementById('productOldPrice').value ? parseFloat(document.getElementById('productOldPrice').value) : null;
-            const category_name = document.getElementById('productCategory').value;
-            const rating = parseFloat(document.getElementById('productRating').value);
-            const is_new = document.getElementById('productIsNew').checked;
-            const is_popular = document.getElementById('productIsPopular').checked;
-            const image_url = document.getElementById('productImage').value;
-            const description = document.getElementById('productDescription').value;
-            const specs = document.getElementById('productSpecs').value;
-            
-            // Валидация
-            if (!name || !price || !image_url) {
-                alert('Пожалуйста, заполните обязательные поля: Название, Цена, Изображение');
-                return;
+            const productData = {
+                name: document.getElementById('productName').value,
+                price: parseInt(document.getElementById('productPrice').value),
+                old_price: document.getElementById('productOldPrice').value ? parseInt(document.getElementById('productOldPrice').value) : null,
+                category_name: document.getElementById('productCategory').value,
+                is_new: document.getElementById('productIsNew').checked,
+                is_popular: document.getElementById('productIsPopular').checked,
+                image_url: document.getElementById('productImage').value,
+                description: document.getElementById('productDescription').value
             }
             
-            // Создаём новый товар
-            const newProduct = {
-                id: Date.now(), // уникальный ID на основе времени
-                name: name,
-                slug: name.toLowerCase().replace(/ /g, '-') + '-' + Date.now(),
-                category_id: Math.floor(Math.random() * 5) + 1,
-                category_name: category_name,
-                price: price,
-                old_price: old_price,
-                rating: rating,
-                is_new: is_new,
-                is_popular: is_popular,
-                stock: 10,
-                image_url: image_url,
-                gallery: [image_url],
-                description: description,
-                specs: specs,
-                created_at: new Date().toISOString()
-            };
+            if (!productData.name || !productData.price || !productData.image_url) {
+                alert('Заполните обязательные поля!')
+                return
+            }
             
-            // Добавляем в массив
-            customProducts.push(newProduct);
-            saveCustomProducts();
-            
-            // Очищаем форму
-            document.getElementById('productForm').reset();
-            document.getElementById('imagePreview').innerHTML = '<span style="color: #A1ABB9;">Предпросмотр</span>';
-            
-            // Показываем сообщение об успехе
-            showMessage('✅ Товар успешно добавлен!');
-            
-            // Обновляем список
-            renderAdminProductsList();
-        });
-        
-        document.getElementById('productImage').addEventListener('input', previewImage);
-        
-        // Инициализация
-        loadCustomProducts();
+            try {
+                const result = await addProduct(productData)
+                
+                if (result.success) {
+                    showMessage('✅ Товар сохранён в Supabase! Обновите главную страницу.')
+                    document.getElementById('productForm').reset()
+                    document.getElementById('imagePreview').innerHTML = 'Предпросмотр'
+                } else {
+                    showMessage('❌ Ошибка: ' + result.error, true)
+                }
+            } catch (error) {
+                showMessage('❌ Ошибка подключения к Supabase', true)
+            }
+        })
     </script>
 </body>
 </html>
