@@ -180,5 +180,37 @@
             }
         });
     </script>
+    <script type="module" src="script.js"></script>
+    
+    <script type="module">
+        function openCatalogModal() {
+            const modal = document.getElementById('catalogModal')
+            modal.classList.add('active')
+            document.body.style.overflow = 'hidden'
+        }
+        
+        function closeCatalogModal() {
+            const modal = document.getElementById('catalogModal')
+            modal.classList.remove('active')
+            document.body.style.overflow = ''
+        }
+        
+        window.openCatalogModal = openCatalogModal
+        window.closeCatalogModal = closeCatalogModal
+        
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('catalogModal')
+            if (e.target === modal) closeCatalogModal()
+        })
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('catalogModal')
+                if (modal.classList.contains('active')) closeCatalogModal()
+            }
+        })
+    </script>
+    <!-- В конце body, после всех скриптов -->
+<script type="module" src="script.js"></script>
 </body>
 </html>
